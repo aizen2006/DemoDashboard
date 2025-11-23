@@ -1,11 +1,12 @@
 import { GoogleGenAI } from "@google/genai";
 
-const apiKey = process.env.API_KEY || '';
+// Vite exposes env variables on import.meta.env
+const apiKey = import.meta.env.VITE_GEMINI_API_KEY || '';
 const ai = new GoogleGenAI({ apiKey });
 
 export const generateInsights = async (contextData: string): Promise<string> => {
   if (!apiKey) {
-    return "API Key is missing. Please configure the environment.";
+    return "API Key is missing. Please check your .env file and ensure VITE_GEMINI_API_KEY is set.";
   }
 
   try {
