@@ -1,0 +1,25 @@
+@import "tailwindcss";
+
+:root {
+    --lynq-900: #0f172a;
+    --lynq-800: #1e293b;
+    --lynq-700: #334155;
+    --lynq-accent: #3b82f6;
+    --lynq-accentHover: #2563eb;
+    --lynq-glow: #60a5fa;
+}
+
+@theme inline{
+  --color-lynq-900: var(--lynq-900);
+  --color-lynq-800: var(--lynq-800);
+  --color-lynq-700: var(--lynq-700);
+  --color-lynq-accent: var(--lynq-accent);
+  --color-lynq-accentHover: var(--lynq-accentHover);
+  --color-lynq-glow: var(--lynq-glow);
+
+  /* Font Family */
+  --font-sans: "Inter", sans-serif;
+
+  /* Animations */
+  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
