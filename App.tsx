@@ -80,11 +80,11 @@ const AppLayout: React.FC = () => {
           
           <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-lynq-800 hover:text-white cursor-pointer transition-colors">
               <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-lg ${isAdmin ? 'bg-gradient-to-br from-purple-500 to-pink-500' : 'bg-gradient-to-br from-blue-500 to-cyan-500'}`}>
-                  {isAdmin ? 'AD' : 'AH'}
+                  {isAdmin ? 'AD' : 'AJ'}
               </div>
               <div className="flex-1 overflow-hidden">
-                  <p className="text-sm font-medium text-white truncate">{isAdmin ? 'Admin User' : 'Abhik Halder'}</p>
-                  <p className="text-xs text-slate-500 truncate">{isAdmin ? 'admin@lynq.com' : 'client@company.com'}</p>
+                  <p className="text-sm font-medium text-white truncate">{isAdmin ? 'Admin User' : 'Alice Johnson'}</p>
+                  <p className="text-xs text-slate-500 truncate">{isAdmin ? 'admin@lynq.com' : 'alice@company.com'}</p>
               </div>
               <LogOut size={16} />
           </div>
