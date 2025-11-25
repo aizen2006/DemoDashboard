@@ -19,6 +19,15 @@ export interface ModuleMetrics {
   completionRate: number;
   avgRating: number;
   regionalStr: { region: string; value: number }[];
+  avgTimeSaved: string;
+  clientObjections: { label: string; value: number }[];
+  confusionAreas: { label: string; value: number }[];
+  csrHotspots?: {
+    region: string;
+    title: string;
+    description: string;
+    items: { label: string; value: number }[];
+  }[];
   csrOverall: number;
   codOverall: number;
 }

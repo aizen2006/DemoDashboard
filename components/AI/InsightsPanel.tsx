@@ -22,7 +22,7 @@ export const InsightsPanel: FC<InsightsPanelProps> = ({ data }) => {
 
   return (
     <motion.div 
-      className="bg-gradient-to-br from-lynq-800 to-lynq-900 border border-indigo-500/30 rounded-2xl p-6 relative overflow-hidden group col-span-1 md:col-span-2 lg:col-span-3 min-h-[250px] flex flex-col"
+      className="bg-linear-to-br from-lynq-800 to-lynq-900 border border-indigo-500/30 rounded-2xl p-6 relative overflow-hidden group col-span-1 md:col-span-2 lg:col-span-8 min-h-[250px] flex flex-col"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >

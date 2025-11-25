@@ -3,7 +3,7 @@ import { MOCK_MODULES } from '../../constants';
 import { MetricCard } from '../../components/UI/MetricCard';
 import { InsightsPanel } from '../../components/AI/InsightsPanel';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { Activity, Target, Users, BookOpen, Star, Award, MapPin } from 'lucide-react';
+import { Activity, Target, Users, BookOpen, Star, Award, MapPin, Clock } from 'lucide-react';
 
 export const UserDashboard: React.FC = () => {
   const [selectedModuleId, setSelectedModuleId] = useState<string>('all');
@@ -36,31 +36,175 @@ export const UserDashboard: React.FC = () => {
       </div>
 
       {/* Bento Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-4">
         
         {/* Key Metrics */}
-        <MetricCard title="Objective Score" value={`${metrics.objectiveScore}%`} icon={<Target size={20} />} />
-        <MetricCard title="STR Score" value={metrics.strScore} icon={<Activity size={20} />} />
-        <MetricCard title="Engagement" value={`${metrics.engagementRate}%`} icon={<Users size={20} />} />
-        <MetricCard title="Completion" value={`${metrics.completionRate}%`} icon={<BookOpen size={20} />} />
+        <MetricCard 
+          title="Objective Score" 
+          value={`${metrics.objectiveScore}%`} 
+          icon={<Target size={20} />} 
+          info="How correct learners were on quiz items we can verify."
+          colSpan="lg:col-span-3"
+        />
+        <MetricCard 
+          title="STR Score" 
+          value={metrics.strScore} 
+          icon={<Activity size={20} />} 
+          info="Single strength score linking skill to completion."
+          colSpan="lg:col-span-3"
+        />
+        <MetricCard 
+          title="Engagement" 
+          value={`${metrics.engagementRate}%`} 
+          icon={<Users size={20} />} 
+          info="How much of the module each learner actually touched."
+          colSpan="lg:col-span-3"
+        />
+        <MetricCard 
+          title="Completion" 
+          value={`${metrics.completionRate}%`} 
+          icon={<BookOpen size={20} />} 
+          info="Who truly finished the module."
+          colSpan="lg:col-span-3"
+        />
         
         {/* AI Section (Spans full width) */}
         <InsightsPanel data={metrics} />
 
-        {/* Secondary Metrics */}
-        <MetricCard title="Avg Rating" value={metrics.avgRating} icon={<Star size={20} />} />
-        <MetricCard title="CSR Overall" value={metrics.csrOverall} icon={<Award size={20} />} />
-        <MetricCard title="COD Overall" value={metrics.codOverall} icon={<Award size={20} />} />
+        {/* Secondary Metrics Row */}
+        <div className="col-span-1 md:col-span-2 lg:col-span-4 flex flex-col gap-4">
+           <MetricCard 
+            title="Avg Rating" 
+            value={metrics.avgRating} 
+            icon={<Star size={20} />} 
+            info="Satisfaction with the learning."
+            className="flex-1"
+          />
+          
+          <MetricCard 
+            title="AVG Time Saved" 
+            value={metrics.avgTimeSaved} 
+            icon={<Clock size={20} />} 
+            info="Average time saved per learner by applying these skills."
+            className="flex-1"
+          />
+        </div>
+
+        {/* CSR Hotspots */}
+        {metrics.csrHotspots && metrics.csrHotspots.length > 0 && (
+          metrics.csrHotspots.map((hotspot, idx) => (
+            <div
+              key={`${hotspot.region}-${idx}`}
+              className="col-span-1 md:col-span-2 lg:col-span-6 bg-lynq-800/60 border border-lynq-700 rounded-2xl p-6 flex flex-col gap-4"
+            >
+              <div className="flex items-center justify-between text-xs uppercase tracking-widest text-slate-500">
+                <span>CSR Hotspots · {hotspot.region}</span>
+              </div>
+              <div>
+                <p className="text-white text-xl font-semibold">{hotspot.title}</p>
+                <p className="text-slate-400 text-sm mt-1">{hotspot.description}</p>
+              </div>
+              <div className="space-y-4">
+                {hotspot.items.map(item => (
+                  <div key={item.label} className="flex items-center gap-4">
+                    <div className="flex-1">
+                      <p className="text-slate-200 text-sm font-medium truncate">{item.label}</p>
+                      <div className="h-2 bg-lynq-900 rounded-full mt-2">
+                        <div
+                          className="h-full rounded-full bg-linear-to-r from-slate-200 to-white"
+                          style={{ width: `${item.value}%` }}
+                        />
+                      </div>
+                    </div>
+                    <span className="text-slate-400 text-sm font-semibold">{item.value}%</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          ))
+        )}
+
+        <MetricCard 
+          title="Top Client Objections" 
+          value="" 
+          colSpan="col-span-1 md:col-span-2 lg:col-span-6" 
+          icon={<Award size={20} />} 
+          info="Ranking of most frequent client objections encountered."
+        >
+           <div className="h-48 mt-4 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={metrics.clientObjections} layout="vertical" margin={{ left: 0 }}>
+                <XAxis type="number" hide />
+                <YAxis 
+                  type="category" 
+                  dataKey="label" 
+                  width={120} 
+                  tick={{ fontSize: 10, fill: '#94a3b8' }} 
+                  tickLine={false} 
+                  axisLine={false}
+                />
+                <Tooltip 
+                  cursor={{fill: '#334155', opacity: 0.2}} 
+                  contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#fff' }}
+                />
+                <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20} fill="#f87171" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </MetricCard>
+
+        <MetricCard 
+          title="Confusion Areas" 
+          value="" 
+          colSpan="col-span-1 md:col-span-2 lg:col-span-6" 
+          icon={<Award size={20} />} 
+          info="Topics where learners struggle the most."
+        >
+           <div className="h-48 mt-4 w-full">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={metrics.confusionAreas} layout="vertical" margin={{ left: 0 }}>
+                <XAxis type="number" hide />
+                <YAxis 
+                  type="category" 
+                  dataKey="label" 
+                  width={120} 
+                  tick={{ fontSize: 10, fill: '#94a3b8' }} 
+                  tickLine={false} 
+                  axisLine={false}
+                />
+                <Tooltip 
+                  cursor={{fill: '#334155', opacity: 0.2}} 
+                  contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#fff' }}
+                />
+                <Bar dataKey="value" radius={[0, 4, 4, 0]} barSize={20} fill="#3b82f6" />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </MetricCard>
         
         {/* Regional Chart */}
-        <MetricCard title="Regional STR %" value="" colSpan="col-span-1 md:col-span-2 lg:col-span-2" icon={<MapPin size={20} />}>
+        <MetricCard 
+          title="Regional STR " 
+          value="" 
+          colSpan="col-span-1 md:col-span-2 lg:col-span-6" 
+          icon={<MapPin size={20} />} 
+          info="Expected premium value a trained learner can generate."
+        >
           <div className="h-48 mt-4 w-full">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={metrics.regionalStr}>
                 <XAxis dataKey="region" stroke="#94a3b8" fontSize={12} tickLine={false} axisLine={false} />
+                <YAxis 
+                  tickFormatter={(value) => `$${value / 1000}k`}
+                  stroke="#94a3b8" 
+                  fontSize={12} 
+                  tickLine={false} 
+                  axisLine={false} 
+                />
                 <Tooltip 
                   cursor={{fill: '#334155', opacity: 0.2}} 
                   contentStyle={{ backgroundColor: '#1e293b', borderColor: '#334155', color: '#fff' }}
+                  formatter={(value: number) => [`$${value.toLocaleString()}`, 'Revenue']}
                 />
                 <Bar dataKey="value" radius={[4, 4, 0, 0]}>
                   {metrics.regionalStr.map((entry, index) => (
