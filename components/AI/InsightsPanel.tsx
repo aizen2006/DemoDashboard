@@ -22,7 +22,7 @@ export const InsightsPanel: FC<InsightsPanelProps> = ({ data }) => {
 
   return (
     <motion.div 
-      className="bg-linear-to-br from-lynq-800 to-lynq-900 border border-indigo-500/30 rounded-2xl p-6 relative overflow-hidden group col-span-1 md:col-span-2 lg:col-span-8 min-h-[250px] flex flex-col"
+      className="bg-linear-to-br from-lynq-800 to-lynq-900 border border-indigo-500/30 rounded-2xl p-4 md:p-6 relative overflow-hidden group col-span-2 md:col-span-4 lg:col-span-8 min-h-[250px] flex flex-col"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
@@ -32,20 +32,21 @@ export const InsightsPanel: FC<InsightsPanelProps> = ({ data }) => {
       <div className="flex justify-between items-center mb-4 relative z-10">
         <div className="flex items-center gap-2">
           <div className="p-2 bg-indigo-500/20 rounded-lg">
-             <Sparkles className="text-indigo-400" size={20} />
+             <Sparkles className="text-indigo-400" size={18} />
           </div>
           <div>
-             <h3 className="text-indigo-100 font-semibold text-lg">AI Strategic Insights</h3>
+             <h3 className="text-indigo-100 font-semibold text-base md:text-lg">AI Strategic Insights</h3>
              <p className="text-indigo-300/60 text-xs">Powered by Gemini 2.5</p>
           </div>
         </div>
         {!insights && !loading && (
           <button 
             onClick={handleGenerate}
-            className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-sm font-medium transition-colors flex items-center gap-2 shadow-lg shadow-indigo-500/20"
+            className="px-3 py-1.5 md:px-4 md:py-2 bg-indigo-600 hover:bg-indigo-500 text-white rounded-lg text-xs md:text-sm font-medium transition-colors flex items-center gap-2 shadow-lg shadow-indigo-500/20"
           >
-            <Sparkles size={16} />
-            Generate Analysis
+            <Sparkles size={14} />
+            <span className="hidden md:inline">Generate Analysis</span>
+            <span className="md:hidden">Analyze</span>
           </button>
         )}
       </div>

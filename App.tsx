@@ -43,7 +43,7 @@ const AppLayout: React.FC = () => {
     <>
       <div className="p-8">
           <h1 className="text-2xl font-bold tracking-tighter text-white flex items-center gap-2">
-              <div className="w-8 h-8 bg-gradient-to-tr from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center text-xs shadow-lg shadow-blue-500/20">L</div>
+              <div className="w-8 h-8 bg-linear-to-tr from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center text-xs shadow-lg shadow-blue-500/20">L</div>
               LYNQ
           </h1>
       </div>
@@ -79,7 +79,7 @@ const AppLayout: React.FC = () => {
           </button>
           
           <div className="flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:bg-lynq-800 hover:text-white cursor-pointer transition-colors">
-              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-lg ${isAdmin ? 'bg-gradient-to-br from-purple-500 to-pink-500' : 'bg-gradient-to-br from-blue-500 to-cyan-500'}`}>
+              <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white font-bold text-xs shadow-lg ${isAdmin ? 'bg-linear-to-br from-purple-500 to-pink-500' : 'bg-linear-to-br from-blue-500 to-cyan-500'}`}>
                   {isAdmin ? 'AD' : 'AJ'}
               </div>
               <div className="flex-1 overflow-hidden">
@@ -99,7 +99,7 @@ const AppLayout: React.FC = () => {
       {/* Mobile Header */}
       <div className="md:hidden flex items-center justify-between p-4 bg-lynq-900/80 backdrop-blur sticky top-0 z-50 border-b border-lynq-700">
           <div className="flex items-center gap-2">
-             <div className="w-8 h-8 bg-gradient-to-tr from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center text-xs text-white font-bold shadow-lg">L</div>
+             <div className="w-8 h-8 bg-linear-to-tr from-blue-500 to-indigo-500 rounded-lg flex items-center justify-center text-xs text-white font-bold shadow-lg">L</div>
              <span className="font-bold text-lg text-white">LYNQ</span>
           </div>
           <button onClick={toggleMobileMenu} className="text-slate-300 hover:text-white p-2">
@@ -128,7 +128,7 @@ const AppLayout: React.FC = () => {
       </aside>
 
       {/* Main Content */}
-      <main className="flex-1 md:ml-64 p-6 md:p-12 relative z-10 overflow-x-hidden">
+      <main className="flex-1 md:ml-64 p-4 md:p-12 relative z-10 overflow-x-hidden">
         <Routes>
            {/* User Routes - Guarded against Admin */}
            <Route path="/" element={isAdmin ? <Navigate to="/admin" /> : <UserDashboard />} />
