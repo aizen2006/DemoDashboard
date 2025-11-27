@@ -104,15 +104,15 @@ export const InsightsPanel: FC<InsightsPanelProps> = ({ data }) => {
 
   return (
     <motion.div 
-      className="bg-surface border border-indigo-200 dark:border-indigo-500/30 rounded-2xl p-4 md:p-6 relative overflow-hidden group col-span-2 md:col-span-4 lg:col-span-8 min-h-[250px] flex flex-col"
+      className="bg-surface border border-border-default dark:border-indigo-500/30 rounded-2xl p-4 md:p-6 relative overflow-hidden group col-span-2 md:col-span-4 lg:col-span-8 min-h-[250px] flex flex-col"
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
     >
       {/* Animated glow background */}
       <div className="absolute top-0 right-0 -mr-20 -mt-20 w-64 h-64 bg-indigo-500/10 rounded-full blur-3xl group-hover:bg-indigo-500/20 transition-all duration-700" />
       
-      {/* Gradient overlay for light mode */}
-      <div className="absolute inset-0 bg-linear-to-br from-indigo-50/80 to-blue-50/80 dark:from-transparent dark:to-transparent pointer-events-none" />
+      {/* Gradient overlay for light mode - softened for better contrast */}
+      <div className="absolute inset-0 bg-linear-to-br from-indigo-50/40 to-blue-50/40 dark:from-transparent dark:to-transparent pointer-events-none" />
 
       {/* Header */}
       <div className="flex justify-between items-center mb-4 relative z-10">
@@ -121,8 +121,8 @@ export const InsightsPanel: FC<InsightsPanelProps> = ({ data }) => {
              <Sparkles className="text-indigo-600 dark:text-indigo-400" size={18} />
           </div>
           <div>
-             <h3 className="text-indigo-800 dark:text-indigo-100 font-semibold text-base md:text-lg">AI Strategic Insights</h3>
-             <p className="text-indigo-500 dark:text-indigo-300/60 text-xs">Powered by OpenAI Agents</p>
+             <h3 className="text-text-primary dark:text-indigo-100 font-semibold text-base md:text-lg">AI Strategic Insights</h3>
+             <p className="text-text-secondary dark:text-indigo-300/60 text-xs">Powered by OpenAI Agents</p>
           </div>
         </div>
         
@@ -206,7 +206,7 @@ export const InsightsPanel: FC<InsightsPanelProps> = ({ data }) => {
                     <div className="mt-0.5 p-1 bg-indigo-100 dark:bg-indigo-500/20 rounded-full shrink-0">
                       <CheckCircle size={12} className="text-indigo-600 dark:text-indigo-400" />
                     </div>
-                    <p className="text-sm text-slate-700 dark:text-slate-300 leading-relaxed">
+                    <p className="text-sm text-text-secondary dark:text-slate-300 leading-relaxed">
                       {insight}
                     </p>
                   </motion.div>
@@ -226,7 +226,7 @@ export const InsightsPanel: FC<InsightsPanelProps> = ({ data }) => {
                     Recommended Action
                   </span>
                 </div>
-                <p className="text-sm font-medium text-indigo-700 dark:text-indigo-300">
+                <p className="text-sm font-medium text-text-primary dark:text-indigo-300">
                   {insights.callToAction}
                 </p>
               </motion.div>
