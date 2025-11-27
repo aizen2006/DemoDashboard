@@ -3,16 +3,42 @@ import { MOCK_MODULES } from '../../constants';
 import { MetricCard } from '../../components/UI/MetricCard';
 import { InsightsPanel } from '../../components/AI/InsightsPanel';
 import { BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, Cell } from 'recharts';
-import { Activity, Target, Users, BookOpen, Star, Award, MapPin, Clock } from 'lucide-react';
+import { Activity, Target, Users, BookOpen, Star, Award, MapPin, Clock, ChevronDown } from 'lucide-react';
 
 export const UserDashboard: React.FC = () => {
   const [selectedModuleId, setSelectedModuleId] = useState<string>('all');
+  const [hotspotRegion, setHotspotRegion] = useState<string>('Global');
+  const [objectionRegion, setObjectionRegion] = useState<string>('Global');
   
   const currentModule = selectedModuleId === 'all' 
     ? MOCK_MODULES[0] // Default to first for aggregated view simulation
     : MOCK_MODULES.find(m => m.id === selectedModuleId) || MOCK_MODULES[0];
 
   const metrics = currentModule.metrics;
+
+  // Filtered Data
+  const activeHotspot = metrics.csrHotspots?.find(h => h.region === hotspotRegion);
+  const currentObjections = metrics.clientObjections?.find(o => o.region === objectionRegion)?.items || 
+                            metrics.clientObjections?.find(o => o.region === 'Global')?.items || [];
+
+  const RegionSelector = ({ selected, onSelect }: { selected: string, onSelect: (r: string) => void }) => (
+    <div className="relative group">
+      <select
+        value={selected}
+        onChange={(e) => onSelect(e.target.value)}
+        className="appearance-none bg-lynq-900/50 border border-lynq-700 text-slate-300 text-xs rounded-md pl-3 pr-8 py-1.5 focus:ring-1 focus:ring-lynq-accent outline-none cursor-pointer hover:bg-lynq-800/50 transition-all"
+      >
+        {['Global', 'North', 'South', 'East', 'West'].map((region) => (
+          <option key={region} value={region} className="bg-lynq-900 text-slate-300">
+            {region}
+          </option>
+        ))}
+      </select>
+      <div className="absolute right-2 top-1/2 -translate-y-1/2 pointer-events-none text-slate-500 group-hover:text-slate-300 transition-colors">
+        <ChevronDown size={12} />
+      </div>
+    </div>
+  );
 
   return (
     <div className="space-y-6">
@@ -23,16 +49,18 @@ export const UserDashboard: React.FC = () => {
           <p className="text-slate-400">Welcome back, Alice</p>
         </div>
         
-        <select 
-          value={selectedModuleId}
-          onChange={(e) => setSelectedModuleId(e.target.value)}
-          className="bg-lynq-800 border border-lynq-700 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-lynq-accent outline-none"
-        >
-          <option value="all" className="bg-lynq-800 text-white">All Modules</option>
-          {MOCK_MODULES.map(m => (
-            <option key={m.id} value={m.id} className="bg-lynq-800 text-white">{m.title}</option>
-          ))}
-        </select>
+        <div className="flex items-center gap-3">
+            <select 
+              value={selectedModuleId}
+              onChange={(e) => setSelectedModuleId(e.target.value)}
+              className="bg-lynq-800 border border-lynq-700 text-white rounded-lg px-4 py-2 focus:ring-2 focus:ring-lynq-accent outline-none"
+            >
+              <option value="all" className="bg-lynq-800 text-white">All Modules</option>
+              {MOCK_MODULES.map(m => (
+                <option key={m.id} value={m.id} className="bg-lynq-800 text-white">{m.title}</option>
+              ))}
+            </select>
+        </div>
       </div>
 
       {/* Bento Grid */}
@@ -91,21 +119,20 @@ export const UserDashboard: React.FC = () => {
         </div>
 
         {/* CSR Hotspots */}
-        {metrics.csrHotspots && metrics.csrHotspots.length > 0 && (
-          metrics.csrHotspots.map((hotspot, idx) => (
+        {activeHotspot ? (
             <div
-              key={`${hotspot.region}-${idx}`}
               className="col-span-1 md:col-span-2 lg:col-span-6 bg-lynq-800/60 border border-lynq-700 rounded-2xl p-6 flex flex-col gap-4"
             >
-              <div className="flex items-center justify-between text-xs uppercase tracking-widest text-slate-500">
-                <span>CSR Hotspots · {hotspot.region}</span>
+              <div className="flex items-center justify-between">
+                <span className="text-xs uppercase tracking-widest text-slate-500">CSR Hotspots </span>
+                <RegionSelector selected={hotspotRegion} onSelect={setHotspotRegion} />
               </div>
               <div>
-                <p className="text-white text-xl font-semibold">{hotspot.title}</p>
-                <p className="text-slate-400 text-sm mt-1">{hotspot.description}</p>
+                <p className="text-white text-xl font-semibold">{activeHotspot.title}</p>
+                <p className="text-slate-400 text-sm mt-1">{activeHotspot.description}</p>
               </div>
               <div className="space-y-4">
-                {hotspot.items.map(item => (
+                {activeHotspot.items.map(item => (
                   <div key={item.label} className="flex items-center gap-4">
                     <div className="flex-1">
                       <p className="text-slate-200 text-sm font-medium truncate">{item.label}</p>
@@ -121,7 +148,16 @@ export const UserDashboard: React.FC = () => {
                 ))}
               </div>
             </div>
-          ))
+        ) : (
+           <div className="col-span-1 md:col-span-2 lg:col-span-6 bg-lynq-800/60 border border-lynq-700 rounded-2xl p-6 flex flex-col gap-4">
+               <div className="flex items-center justify-between">
+                 <span className="text-xs uppercase tracking-widest text-slate-500">CSR Hotspots · {hotspotRegion}</span>
+                 <RegionSelector selected={hotspotRegion} onSelect={setHotspotRegion} />
+               </div>
+               <div className="flex-1 flex items-center justify-center py-12">
+                   <p className="text-slate-500">No hotspot data for {hotspotRegion} region</p>
+               </div>
+           </div>
         )}
 
         <MetricCard 
@@ -130,10 +166,11 @@ export const UserDashboard: React.FC = () => {
           colSpan="col-span-1 md:col-span-2 lg:col-span-6" 
           icon={<Award size={20} />} 
           info="Ranking of most frequent client objections encountered."
+          headerAction={<RegionSelector selected={objectionRegion} onSelect={setObjectionRegion} />}
         >
            <div className="h-48 mt-4 w-full">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={metrics.clientObjections} layout="vertical" margin={{ left: 0 }}>
+              <BarChart data={currentObjections} layout="vertical" margin={{ left: 0 }}>
                 <XAxis type="number" hide />
                 <YAxis 
                   type="category" 

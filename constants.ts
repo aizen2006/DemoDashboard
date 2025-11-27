@@ -37,11 +37,56 @@ export const MOCK_MODULES: Module[] = [
       ],
       avgTimeSaved: '12h',
       clientObjections: [
-        { label: 'High premium / cost', value: 35 },
-        { label: 'Product complexity', value: 25 },
-        { label: 'Already have cover', value: 15 },
-        { label: 'Unclear returns', value: 12 },
-        { label: 'Claim process doubts', value: 10 },
+        {
+          region: 'Global',
+          items: [
+            { label: 'High premium / cost', value: 35 },
+            { label: 'Product complexity', value: 25 },
+            { label: 'Already have cover', value: 15 },
+            { label: 'Unclear returns', value: 12 },
+            { label: 'Claim process doubts', value: 10 },
+          ]
+        },
+        {
+          region: 'North',
+          items: [
+            { label: 'High premium / cost', value: 40 },
+            { label: 'Product complexity', value: 20 },
+            { label: 'Already have cover', value: 18 },
+            { label: 'Unclear returns', value: 10 },
+            { label: 'Claim process doubts', value: 12 },
+          ]
+        },
+        {
+          region: 'South',
+          items: [
+            { label: 'High premium / cost', value: 30 },
+            { label: 'Product complexity', value: 30 },
+            { label: 'Already have cover', value: 12 },
+            { label: 'Unclear returns', value: 15 },
+            { label: 'Claim process doubts', value: 13 },
+          ]
+        },
+        {
+          region: 'East',
+          items: [
+            { label: 'High premium / cost', value: 32 },
+            { label: 'Product complexity', value: 22 },
+            { label: 'Already have cover', value: 20 },
+            { label: 'Unclear returns', value: 14 },
+            { label: 'Claim process doubts', value: 12 },
+          ]
+        },
+        {
+          region: 'West',
+          items: [
+            { label: 'High premium / cost', value: 38 },
+            { label: 'Product complexity', value: 24 },
+            { label: 'Already have cover', value: 14 },
+            { label: 'Unclear returns', value: 11 },
+            { label: 'Claim process doubts', value: 13 },
+          ]
+        }
       ],
       confusionAreas: [
         { label: 'Health-Fund withdrawals', value: 25 },
@@ -52,13 +97,53 @@ export const MOCK_MODULES: Module[] = [
       ],
       csrHotspots: [
         {
-          region: 'North',
+          region: 'Global',
           title: 'Conversion Stoppers',
           description: 'Cards/questions where learners got stuck most.',
           items: [
             { label: 'Term vs Savings', value: 34 },
             { label: 'Affluent Female Premium', value: 26 },
             { label: 'Claims App (iProtect)', value: 18 },
+          ],
+        },
+        {
+          region: 'North',
+          title: 'Conversion Stoppers',
+          description: 'Cards/questions where learners got stuck most.',
+          items: [
+            { label: 'Term vs Savings', value: 38 },
+            { label: 'Affluent Female Premium', value: 22 },
+            { label: 'Claims App (iProtect)', value: 20 },
+          ],
+        },
+        {
+          region: 'South',
+          title: 'Conversion Stoppers',
+          description: 'Cards/questions where learners got stuck most.',
+          items: [
+            { label: 'Term vs Savings', value: 30 },
+            { label: 'Affluent Female Premium', value: 30 },
+            { label: 'Claims App (iProtect)', value: 15 },
+          ],
+        },
+        {
+          region: 'East',
+          title: 'Conversion Stoppers',
+          description: 'Cards/questions where learners got stuck most.',
+          items: [
+            { label: 'Term vs Savings', value: 33 },
+            { label: 'Affluent Female Premium', value: 27 },
+            { label: 'Claims App (iProtect)', value: 17 },
+          ],
+        },
+        {
+          region: 'West',
+          title: 'Conversion Stoppers',
+          description: 'Cards/questions where learners got stuck most.',
+          items: [
+            { label: 'Term vs Savings', value: 35 },
+            { label: 'Affluent Female Premium', value: 25 },
+            { label: 'Claims App (iProtect)', value: 19 },
           ],
         },
       ],
@@ -89,10 +174,15 @@ export const MOCK_MODULES: Module[] = [
       ],
       avgTimeSaved: '8h',
       clientObjections: [
-        { label: 'Lack of time', value: 40 },
-        { label: 'Not a priority', value: 30 },
-        { label: 'Budget constraints', value: 20 },
-        { label: 'Skeptical of value', value: 10 },
+        {
+          region: 'Global',
+          items: [
+            { label: 'Lack of time', value: 40 },
+            { label: 'Not a priority', value: 30 },
+            { label: 'Budget constraints', value: 20 },
+            { label: 'Skeptical of value', value: 10 },
+          ]
+        }
       ],
       confusionAreas: [
         { label: 'Empathy application', value: 30 },
@@ -163,10 +253,15 @@ export const MOCK_MODULES: Module[] = [
       ],
       avgTimeSaved: '15h',
       clientObjections: [
-        { label: 'Too expensive', value: 45 },
-        { label: 'Competitor offer', value: 25 },
-        { label: 'Long contract', value: 15 },
-        { label: 'Implementation time', value: 15 },
+        {
+          region: 'Global',
+          items: [
+            { label: 'Too expensive', value: 45 },
+            { label: 'Competitor offer', value: 25 },
+            { label: 'Long contract', value: 15 },
+            { label: 'Implementation time', value: 15 },
+          ]
+        }
       ],
       confusionAreas: [
         { label: 'Pricing tier differences', value: 35 },

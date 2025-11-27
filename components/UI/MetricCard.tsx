@@ -12,6 +12,7 @@ interface MetricCardProps {
   colSpan?: string;
   className?: string;
   children?: React.ReactNode;
+  headerAction?: React.ReactNode;
 }
 
 export const MetricCard: React.FC<MetricCardProps> = ({ 
@@ -22,14 +23,15 @@ export const MetricCard: React.FC<MetricCardProps> = ({
   info,
   colSpan = "col-span-1",
   className = "",
-  children
+  children,
+  headerAction
 }) => {
   return (
     <motion.div 
       whileHover={{ scale: 1.01 }}
       className={`bg-lynq-800/50 backdrop-blur-md border border-lynq-700 rounded-2xl p-6 flex flex-col justify-between ${colSpan} ${className}`}
     >
-      <div className="flex justify-between items-start mb-4">
+      <div className="flex justify-between items-center mb-4">
         <div className="flex items-center gap-2">
           <h3 className="text-slate-400 text-sm font-medium uppercase tracking-wider">{title}</h3>
           {info && (
@@ -45,7 +47,10 @@ export const MetricCard: React.FC<MetricCardProps> = ({
             </div>
           )}
         </div>
-        {icon && <div className="text-lynq-accent bg-lynq-accent/10 p-2 rounded-lg">{icon}</div>}
+        <div className="flex items-center gap-3">
+          {headerAction}
+          {icon && <div className="text-lynq-accent bg-lynq-accent/10 p-2 rounded-lg">{icon}</div>}
+        </div>
       </div>
       
       {children ? (

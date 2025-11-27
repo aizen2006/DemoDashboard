@@ -20,7 +20,10 @@ export interface ModuleMetrics {
   avgRating: number;
   regionalStr: { region: string; value: number }[];
   avgTimeSaved: string;
-  clientObjections: { label: string; value: number }[];
+  clientObjections: { 
+    region: string; 
+    items: { label: string; value: number }[]; 
+  }[];
   confusionAreas: { label: string; value: number }[];
   csrHotspots?: {
     region: string;
