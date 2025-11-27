@@ -46,13 +46,13 @@ export const SidePanel: React.FC<SidePanelProps> = ({ isOpen, onClose, title, ch
             animate={{ x: 0 }}
             exit={{ x: '100%' }}
             transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            className="fixed top-0 right-0 h-full w-full md:w-[600px] lg:w-[800px] bg-lynq-800 border-l border-lynq-700 shadow-2xl z-50 overflow-y-auto flex flex-col"
+            className="fixed top-0 right-0 h-full w-full md:w-[600px] lg:w-[800px] bg-surface border-l border-border-default shadow-2xl z-50 overflow-y-auto flex flex-col"
           >
-            <div className="flex items-center justify-between p-6 border-b border-lynq-700 bg-lynq-800/90 sticky top-0 backdrop-blur-md z-10">
-              <h2 className="text-xl font-semibold text-white">{title || 'Details'}</h2>
+            <div className="flex items-center justify-between p-6 border-b border-border-default bg-surface/90 sticky top-0 backdrop-blur-md z-10">
+              <h2 className="text-xl font-semibold text-text-primary">{title || 'Details'}</h2>
               <button 
                 onClick={onClose}
-                className="p-2 hover:bg-lynq-700 rounded-full text-slate-400 hover:text-white transition-colors"
+                className="p-2 hover:bg-surface-hover rounded-full text-text-muted hover:text-text-primary transition-colors"
               >
                 <X size={20} />
               </button>

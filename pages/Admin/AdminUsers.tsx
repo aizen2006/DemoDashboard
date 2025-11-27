@@ -72,17 +72,17 @@ export const AdminUsers: React.FC = () => {
     <div className="space-y-6">
        <div className="flex flex-col md:flex-row justify-between md:items-center gap-4 mb-6">
         <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">User Management</h1>
-          <p className="text-slate-400">Manage access and module assignments.</p>
+          <h1 className="text-3xl font-bold text-text-primary tracking-tight">User Management</h1>
+          <p className="text-text-muted">Manage access and module assignments.</p>
         </div>
         <div className="relative">
-          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-500" size={18} />
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-text-muted" size={18} />
           <input 
             type="text" 
             placeholder="Search users..." 
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className="pl-10 pr-4 py-2 bg-lynq-800 border border-lynq-700 rounded-lg text-slate-200 outline-none focus:border-lynq-accent w-full md:w-64"
+            className="pl-10 pr-4 py-2 bg-surface border border-border-default rounded-lg text-text-primary outline-none focus:border-brand w-full md:w-64 placeholder:text-text-muted"
           />
         </div>
       </div>
@@ -92,7 +92,7 @@ export const AdminUsers: React.FC = () => {
           <div 
             key={user.id}
             onClick={() => openUserDetail(user.id)}
-            className="bg-lynq-800 border border-lynq-700 hover:border-lynq-500 rounded-xl p-6 cursor-pointer group transition-all hover:shadow-lg hover:shadow-blue-900/10"
+            className="bg-surface border border-border-default hover:border-brand/50 rounded-xl p-6 cursor-pointer group transition-all hover:shadow-lg hover:shadow-brand/5"
           >
              <div className="flex justify-between items-start mb-4">
                 <div className="flex items-center gap-3">
@@ -100,27 +100,27 @@ export const AdminUsers: React.FC = () => {
                       {user.name.charAt(0)}
                    </div>
                    <div>
-                      <h3 className="text-white font-medium group-hover:text-lynq-accent transition-colors">{user.name}</h3>
-                      <p className="text-slate-500 text-xs flex items-center gap-1"><Mail size={10}/> {user.email}</p>
+                      <h3 className="text-text-primary font-medium group-hover:text-brand transition-colors">{user.name}</h3>
+                      <p className="text-text-muted text-xs flex items-center gap-1"><Mail size={10}/> {user.email}</p>
                    </div>
                 </div>
-                <span className={`px-2 py-0.5 rounded text-xs border ${user.role === 'Admin' ? 'bg-purple-500/10 border-purple-500/20 text-purple-400' : 'bg-blue-500/10 border-blue-500/20 text-blue-400'}`}>
+                <span className={`px-2 py-0.5 rounded text-xs border ${user.role === 'Admin' ? 'bg-purple-500/10 border-purple-500/20 text-purple-600 dark:text-purple-400' : 'bg-blue-500/10 border-blue-500/20 text-blue-600 dark:text-blue-400'}`}>
                   {user.role}
                 </span>
              </div>
              
-             <div className="space-y-2 text-sm text-slate-400 border-t border-lynq-700/50 pt-4">
+             <div className="space-y-2 text-sm text-text-muted border-t border-border-subtle pt-4">
                 <div className="flex justify-between">
                    <span className="flex items-center gap-2"><Briefcase size={14} /> Department</span>
-                   <span className="text-slate-200">{user.department || 'N/A'}</span>
+                   <span className="text-text-primary">{user.department || 'N/A'}</span>
                 </div>
                 <div className="flex justify-between">
                    <span className="flex items-center gap-2"><Calendar size={14} /> Last Active</span>
-                   <span className="text-slate-200">{user.lastActive || 'Never'}</span>
+                   <span className="text-text-primary">{user.lastActive || 'Never'}</span>
                 </div>
                 <div className="flex justify-between items-center pt-2">
                    <span>Assigned Modules</span>
-                   <span className="bg-lynq-700 px-2 py-0.5 rounded-full text-xs text-white">{user.assignedModules.length}</span>
+                   <span className="bg-surface-hover px-2 py-0.5 rounded-full text-xs text-text-primary">{user.assignedModules.length}</span>
                 </div>
              </div>
           </div>
@@ -135,33 +135,33 @@ export const AdminUsers: React.FC = () => {
          {selectedUser && (
             <div className="space-y-8">
                <div className="flex items-center gap-4">
-                  <div className="w-16 h-16 bg-gradient-to-br from-lynq-700 to-lynq-600 rounded-full flex items-center justify-center text-2xl font-bold text-white">
+                  <div className="w-16 h-16 bg-gradient-to-br from-brand/50 to-brand rounded-full flex items-center justify-center text-2xl font-bold text-white">
                      {selectedUser.name.charAt(0)}
                   </div>
                   <div>
-                     <h2 className="text-xl font-bold text-white">{selectedUser.name}</h2>
-                     <div className="flex items-center gap-2 text-slate-400 text-sm mt-1">
+                     <h2 className="text-xl font-bold text-text-primary">{selectedUser.name}</h2>
+                     <div className="flex items-center gap-2 text-text-muted text-sm mt-1">
                         <Shield size={14} /> {selectedUser.role}
-                        <span className="text-lynq-700">•</span>
+                        <span className="text-border-default">•</span>
                         <Briefcase size={14} /> {selectedUser.department || 'No Dept'}
                      </div>
                   </div>
                </div>
 
-               <div className="bg-lynq-900 border border-lynq-700 rounded-xl p-6">
+               <div className="bg-surface-hover dark:bg-lynq-900 border border-border-default rounded-xl p-6">
                   <div className="flex justify-between items-center mb-4">
-                       <h3 className="text-white font-semibold">Assigned Modules</h3>
-                       <span className="text-xs text-slate-500">{selectedUser.assignedModules.length} active</span>
+                       <h3 className="text-text-primary font-semibold">Assigned Modules</h3>
+                       <span className="text-xs text-text-muted">{selectedUser.assignedModules.length} active</span>
                   </div>
                   
                   <div className="space-y-2">
                      {getAssignedModuleDetails(selectedUser.id).length > 0 ? (
                         getAssignedModuleDetails(selectedUser.id).map((module) => (
-                           <div key={module?.id} className="flex items-center justify-between p-3 bg-lynq-800/50 rounded-lg border border-lynq-700/50 group hover:border-lynq-600 transition-colors">
-                              <span className="text-slate-300 text-sm font-medium">{module?.title}</span>
+                           <div key={module?.id} className="flex items-center justify-between p-3 bg-surface rounded-lg border border-border-subtle group hover:border-border-default transition-colors">
+                              <span className="text-text-secondary text-sm font-medium">{module?.title}</span>
                               <button 
                                 onClick={(e) => { e.stopPropagation(); handleUnassign(module!.id); }}
-                                className="text-slate-600 hover:text-red-400 p-1 rounded transition-colors"
+                                className="text-text-muted hover:text-red-500 p-1 rounded transition-colors"
                                 title="Unassign"
                               >
                                 <Trash2 size={14} />
@@ -169,37 +169,37 @@ export const AdminUsers: React.FC = () => {
                            </div>
                         ))
                      ) : (
-                        <p className="text-slate-500 text-sm italic py-2">No modules currently assigned.</p>
+                        <p className="text-text-muted text-sm italic py-2">No modules currently assigned.</p>
                      )}
                   </div>
 
                   {assignMode ? (
-                      <div className="mt-4 p-4 bg-lynq-800 border border-lynq-700 rounded-lg animate-in fade-in slide-in-from-top-2">
-                          <label className="block text-xs text-slate-400 mb-2">Select Module to Assign</label>
+                      <div className="mt-4 p-4 bg-surface border border-border-default rounded-lg animate-in fade-in slide-in-from-top-2">
+                          <label className="block text-xs text-text-muted mb-2">Select Module to Assign</label>
                           <div className="relative mb-3">
                               <select 
                                 value={moduleToAssign}
                                 onChange={(e) => setModuleToAssign(e.target.value)}
-                                className="appearance-none w-full bg-lynq-900 border border-lynq-600 text-white rounded-lg pl-3 pr-10 py-2 text-sm focus:outline-none focus:border-lynq-accent cursor-pointer"
+                                className="appearance-none w-full bg-surface-hover dark:bg-lynq-900 border border-border-default text-text-primary rounded-lg pl-3 pr-10 py-2 text-sm focus:outline-none focus:border-brand cursor-pointer"
                               >
-                                  <option value="" className="bg-lynq-800 text-white">-- Select a module --</option>
+                                  <option value="" className="bg-surface text-text-primary">-- Select a module --</option>
                                   {availableModules.map(m => (
-                                      <option key={m.id} value={m.id} className="bg-lynq-800 text-white">{m.title}</option>
+                                      <option key={m.id} value={m.id} className="bg-surface text-text-primary">{m.title}</option>
                                   ))}
                               </select>
-                              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" size={14} />
+                              <ChevronDown className="absolute right-3 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" size={14} />
                           </div>
                           <div className="flex gap-2">
                               <button 
                                 onClick={() => setAssignMode(false)}
-                                className="flex-1 py-2 text-xs text-slate-400 hover:text-white"
+                                className="flex-1 py-2 text-xs text-text-muted hover:text-text-primary"
                               >
                                   Cancel
                               </button>
                               <button 
                                 onClick={handleAssign}
                                 disabled={!moduleToAssign}
-                                className="flex-1 bg-lynq-accent disabled:opacity-50 hover:bg-lynq-accentHover text-white py-2 rounded-lg text-xs font-bold transition-colors"
+                                className="flex-1 bg-brand disabled:opacity-50 hover:bg-brand-hover text-white py-2 rounded-lg text-xs font-bold transition-colors"
                               >
                                   Confirm Assignment
                               </button>
@@ -208,23 +208,23 @@ export const AdminUsers: React.FC = () => {
                   ) : (
                     <button 
                         onClick={() => setAssignMode(true)}
-                        className="mt-4 w-full py-2.5 border border-dashed border-lynq-600 text-lynq-400 hover:border-lynq-accent hover:text-lynq-accent hover:bg-lynq-accent/5 rounded-lg text-sm transition-all flex items-center justify-center gap-2"
+                        className="mt-4 w-full py-2.5 border border-dashed border-border-default text-text-muted hover:border-brand hover:text-brand hover:bg-brand/5 rounded-lg text-sm transition-all flex items-center justify-center gap-2"
                     >
                         <Plus size={16} /> Assign New Module
                     </button>
                   )}
                </div>
 
-               <div className="bg-lynq-900 border border-lynq-700 rounded-xl p-6">
-                  <h3 className="text-white font-semibold mb-4">Account Settings</h3>
+               <div className="bg-surface-hover dark:bg-lynq-900 border border-border-default rounded-xl p-6">
+                  <h3 className="text-text-primary font-semibold mb-4">Account Settings</h3>
                    <div className="space-y-4">
                       <div>
-                         <label className="block text-xs text-slate-500 uppercase mb-1">Email Address</label>
-                         <input type="text" value={selectedUser.email} readOnly className="w-full bg-lynq-800 border border-lynq-700 rounded p-2 text-slate-400 text-sm outline-none" />
+                         <label className="block text-xs text-text-muted uppercase mb-1">Email Address</label>
+                         <input type="text" value={selectedUser.email} readOnly className="w-full bg-surface border border-border-default rounded p-2 text-text-muted text-sm outline-none" />
                       </div>
                       <div className="flex gap-4 pt-2">
-                         <button className="flex-1 bg-lynq-800 hover:bg-lynq-700 text-white py-2 rounded text-sm transition-colors">Reset Password</button>
-                         <button className="flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-400 border border-red-500/20 py-2 rounded text-sm transition-colors">Deactivate User</button>
+                         <button className="flex-1 bg-surface hover:bg-border-default text-text-primary py-2 rounded text-sm transition-colors">Reset Password</button>
+                         <button className="flex-1 bg-red-500/10 hover:bg-red-500/20 text-red-600 dark:text-red-400 border border-red-500/20 py-2 rounded text-sm transition-colors">Deactivate User</button>
                       </div>
                    </div>
                </div>

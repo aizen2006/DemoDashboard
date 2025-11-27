@@ -1,6 +1,40 @@
 @import "tailwindcss";
 
+/* ============================================
+   SEMANTIC THEME SYSTEM
+   ============================================ */
+
+/* Light Mode (Default) */
 :root {
+    /* Canvas - App Background */
+    --bg-canvas: #f8fafc;
+    
+    /* Surface - Cards, Sidebars, Modals */
+    --bg-surface: #ffffff;
+    --bg-surface-hover: #f1f5f9;
+    --bg-surface-elevated: #ffffff;
+    
+    /* Text Colors */
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #94a3b8;
+    --text-inverted: #ffffff;
+    
+    /* Borders */
+    --border-default: #e2e8f0;
+    --border-subtle: #f1f5f9;
+    
+    /* Brand/Accent */
+    --color-brand: #3b82f6;
+    --color-brand-hover: #2563eb;
+    --color-brand-glow: #60a5fa;
+    
+    /* Status Colors */
+    --color-success: #10b981;
+    --color-warning: #f59e0b;
+    --color-error: #ef4444;
+    
+    /* Legacy LYNQ Colors (for backwards compat) */
     --lynq-900: #0f172a;
     --lynq-800: #1e293b;
     --lynq-700: #334155;
@@ -9,17 +43,90 @@
     --lynq-glow: #60a5fa;
 }
 
-@theme inline{
-  --color-lynq-900: var(--lynq-900);
-  --color-lynq-800: var(--lynq-800);
-  --color-lynq-700: var(--lynq-700);
-  --color-lynq-accent: var(--lynq-accent);
-  --color-lynq-accentHover: var(--lynq-accentHover);
-  --color-lynq-glow: var(--lynq-glow);
+/* Dark Mode */
+.dark {
+    /* Canvas - App Background */
+    --bg-canvas: #0f172a;
+    
+    /* Surface - Cards, Sidebars, Modals */
+    --bg-surface: #1e293b;
+    --bg-surface-hover: #334155;
+    --bg-surface-elevated: #1e293b;
+    
+    /* Text Colors */
+    --text-primary: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --text-muted: #64748b;
+    --text-inverted: #0f172a;
+    
+    /* Borders */
+    --border-default: #334155;
+    --border-subtle: #1e293b;
+    
+    /* Brand/Accent (same in dark mode) */
+    --color-brand: #3b82f6;
+    --color-brand-hover: #60a5fa;
+    --color-brand-glow: #60a5fa;
+}
 
-  /* Font Family */
-  --font-sans: "Inter", sans-serif;
+/* ============================================
+   TAILWIND THEME REGISTRATION
+   ============================================ */
+@theme inline {
+    /* Semantic Colors */
+    --color-canvas: var(--bg-canvas);
+    --color-surface: var(--bg-surface);
+    --color-surface-hover: var(--bg-surface-hover);
+    --color-surface-elevated: var(--bg-surface-elevated);
+    
+    --color-text-primary: var(--text-primary);
+    --color-text-secondary: var(--text-secondary);
+    --color-text-muted: var(--text-muted);
+    --color-text-inverted: var(--text-inverted);
+    
+    --color-border-default: var(--border-default);
+    --color-border-subtle: var(--border-subtle);
+    
+    --color-brand: var(--color-brand);
+    --color-brand-hover: var(--color-brand-hover);
+    --color-brand-glow: var(--color-brand-glow);
+    
+    /* Legacy LYNQ Colors */
+    --color-lynq-900: var(--lynq-900);
+    --color-lynq-800: var(--lynq-800);
+    --color-lynq-700: var(--lynq-700);
+    --color-lynq-accent: var(--lynq-accent);
+    --color-lynq-accentHover: var(--lynq-accentHover);
+    --color-lynq-glow: var(--lynq-glow);
 
-  /* Animations */
-  --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    /* Font Family */
+    --font-sans: "Inter", sans-serif;
+
+    /* Animations */
+    --animate-pulse-slow: pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* ============================================
+   GLOBAL STYLES
+   ============================================ */
+body {
+    background-color: var(--bg-canvas);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Custom Scrollbar - Light Mode */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--bg-surface); 
+}
+::-webkit-scrollbar-thumb {
+    background: var(--border-default); 
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--text-muted); 
 }

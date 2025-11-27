@@ -42,9 +42,9 @@ export const AdminRequests: React.FC = () => {
 
   const getStatusColor = (status: string) => {
     switch(status) {
-        case 'Resolved': return 'text-green-400 bg-green-400/10 border-green-400/20';
-        case 'In Progress': return 'text-blue-400 bg-blue-400/10 border-blue-400/20';
-        default: return 'text-yellow-400 bg-yellow-400/10 border-yellow-400/20';
+        case 'Resolved': return 'text-green-600 dark:text-green-400 bg-green-400/10 border-green-400/20';
+        case 'In Progress': return 'text-blue-600 dark:text-blue-400 bg-blue-400/10 border-blue-400/20';
+        default: return 'text-yellow-600 dark:text-yellow-400 bg-yellow-400/10 border-yellow-400/20';
     }
   };
 
@@ -59,13 +59,13 @@ export const AdminRequests: React.FC = () => {
   return (
     <div className="space-y-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-3xl font-bold text-white tracking-tight">Tweak Requests</h1>
-        <div className="flex gap-2 bg-lynq-800 p-1 rounded-lg border border-lynq-700">
+        <h1 className="text-3xl font-bold text-text-primary tracking-tight">Tweak Requests</h1>
+        <div className="flex gap-2 bg-surface p-1 rounded-lg border border-border-default">
             {['All', 'Pending', 'In Progress', 'Resolved'].map(f => (
                 <button 
                     key={f}
                     onClick={() => setFilter(f)}
-                    className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${filter === f ? 'bg-lynq-700 text-white shadow-sm' : 'text-slate-500 hover:text-slate-300'}`}
+                    className={`px-3 py-1 rounded-md text-xs font-medium transition-all ${filter === f ? 'bg-surface-hover text-text-primary shadow-sm' : 'text-text-muted hover:text-text-secondary'}`}
                 >
                     {f}
                 </button>
@@ -78,23 +78,23 @@ export const AdminRequests: React.FC = () => {
             <div 
                 key={req.id} 
                 onClick={() => setSelectedRequest(req)}
-                className="bg-lynq-800 border border-lynq-700 hover:border-lynq-500 p-4 rounded-xl cursor-pointer transition-all flex items-center justify-between group"
+                className="bg-surface border border-border-default hover:border-brand/50 p-4 rounded-xl cursor-pointer transition-all flex items-center justify-between group"
             >
                 <div className="flex items-center gap-4">
                     <div className={`p-2 rounded-lg ${getStatusColor(req.status)}`}>
                         {getStatusIcon(req.status)}
                     </div>
                     <div>
-                        <h4 className="text-white font-medium group-hover:text-lynq-accent transition-colors">{req.moduleTitle}</h4>
+                        <h4 className="text-text-primary font-medium group-hover:text-brand transition-colors">{req.moduleTitle}</h4>
                         <div className="flex items-center gap-2 mt-1">
-                             <span className="text-xs bg-lynq-700 text-slate-300 px-1.5 py-0.5 rounded">{req.type}</span>
-                             <span className="text-xs text-slate-500">Requested by User {req.requestedBy}</span>
+                             <span className="text-xs bg-surface-hover text-text-secondary px-1.5 py-0.5 rounded">{req.type}</span>
+                             <span className="text-xs text-text-muted">Requested by User {req.requestedBy}</span>
                         </div>
                     </div>
                 </div>
                 <div className="flex flex-col items-end gap-1">
                     <span className={`text-xs px-2 py-1 rounded border ${getStatusColor(req.status)}`}>{req.status}</span>
-                    <span className="text-xs text-slate-600">{req.createdAt}</span>
+                    <span className="text-xs text-text-muted">{req.createdAt}</span>
                 </div>
             </div>
         ))}
@@ -107,17 +107,17 @@ export const AdminRequests: React.FC = () => {
       >
         {selectedRequest && (
             <div className="space-y-8">
-                <div className="bg-lynq-900 border border-lynq-700 rounded-lg p-5">
-                     <div className="flex justify-between mb-4 border-b border-lynq-800 pb-3">
-                         <span className="text-sm text-slate-400">Current Status</span>
+                <div className="bg-surface-hover dark:bg-lynq-900 border border-border-default rounded-lg p-5">
+                     <div className="flex justify-between mb-4 border-b border-border-subtle pb-3">
+                         <span className="text-sm text-text-muted">Current Status</span>
                          <span className={`text-sm font-medium px-2 py-0.5 rounded ${getStatusColor(selectedRequest.status)}`}>{selectedRequest.status}</span>
                      </div>
-                     <h3 className="text-lg text-white font-semibold mb-2">Description</h3>
-                     <p className="text-slate-300 text-sm leading-relaxed">{selectedRequest.description}</p>
+                     <h3 className="text-lg text-text-primary font-semibold mb-2">Description</h3>
+                     <p className="text-text-secondary text-sm leading-relaxed">{selectedRequest.description}</p>
                 </div>
 
                 <div>
-                    <h4 className="text-white font-medium mb-3">Update Status</h4>
+                    <h4 className="text-text-primary font-medium mb-3">Update Status</h4>
                     <div className="grid grid-cols-3 gap-3">
                         {(['Pending', 'In Progress', 'Resolved'] as const).map((status) => (
                              <button 
@@ -125,8 +125,8 @@ export const AdminRequests: React.FC = () => {
                                 onClick={() => handleStatusUpdate(status)}
                                 className={`py-2 rounded-lg text-sm border transition-all ${
                                     selectedRequest.status === status 
-                                    ? 'bg-lynq-accent text-white border-lynq-accent' 
-                                    : 'bg-lynq-900 border-lynq-700 text-slate-400 hover:border-slate-500 hover:text-white'
+                                    ? 'bg-brand text-white border-brand' 
+                                    : 'bg-surface-hover dark:bg-lynq-900 border-border-default text-text-muted hover:border-text-muted hover:text-text-primary'
                                 }`}
                              >
                                 {status}
@@ -136,18 +136,18 @@ export const AdminRequests: React.FC = () => {
                 </div>
 
                  <div>
-                    <h4 className="text-white font-medium mb-3">Admin Comments</h4>
+                    <h4 className="text-text-primary font-medium mb-3">Admin Comments</h4>
                     <div className="relative">
                         <textarea 
                             value={commentInput}
                             onChange={(e) => setCommentInput(e.target.value)}
-                            className="w-full bg-lynq-900 border border-lynq-700 rounded-lg p-3 text-white focus:border-lynq-accent outline-none h-32 resize-none placeholder-slate-600" 
+                            className="w-full bg-surface-hover dark:bg-lynq-900 border border-border-default rounded-lg p-3 text-text-primary focus:border-brand outline-none h-32 resize-none placeholder-text-muted" 
                             placeholder="Add internal notes or response to user..."
                         ></textarea>
                     </div>
                     <button 
                         onClick={handleSaveComment}
-                        className="mt-3 bg-lynq-accent hover:bg-lynq-accentHover text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 ml-auto shadow-lg shadow-blue-500/20"
+                        className="mt-3 bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-lg text-sm flex items-center gap-2 ml-auto shadow-lg shadow-brand/20"
                     >
                         <Save size={16} /> Save Comment
                     </button>

@@ -47,19 +47,19 @@ export const UserResponses: React.FC = () => {
 
   const getStatusIcon = (status: string) => {
     switch(status) {
-      case 'Passed': return <CheckCircle size={16} className="text-green-400" />;
-      case 'Failed': return <XCircle size={16} className="text-red-400" />;
-      case 'Completed': return <CheckCircle size={16} className="text-blue-400" />;
-      default: return <Clock size={16} className="text-yellow-400" />;
+      case 'Passed': return <CheckCircle size={16} className="text-green-500 dark:text-green-400" />;
+      case 'Failed': return <XCircle size={16} className="text-red-500 dark:text-red-400" />;
+      case 'Completed': return <CheckCircle size={16} className="text-blue-500 dark:text-blue-400" />;
+      default: return <Clock size={16} className="text-yellow-500 dark:text-yellow-400" />;
     }
   };
 
   const getTypeIcon = (type: string) => {
       switch(type) {
-          case 'Quiz': return <FileQuestion size={16} className="text-purple-400" />;
-          case 'Poll': return <BarChart2 size={16} className="text-orange-400" />;
-          case 'Survey': return <BarChart2 size={16} className="text-pink-400" />;
-          case 'Assessment': return <ClipboardCheck size={16} className="text-blue-400" />;
+          case 'Quiz': return <FileQuestion size={16} className="text-purple-500 dark:text-purple-400" />;
+          case 'Poll': return <BarChart2 size={16} className="text-orange-500 dark:text-orange-400" />;
+          case 'Survey': return <BarChart2 size={16} className="text-pink-500 dark:text-pink-400" />;
+          case 'Assessment': return <ClipboardCheck size={16} className="text-blue-500 dark:text-blue-400" />;
           default: return <FileQuestion size={16} />;
       }
   };
@@ -68,25 +68,25 @@ export const UserResponses: React.FC = () => {
     <div className="space-y-6">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
-          <h1 className="text-3xl font-bold text-white tracking-tight">My Responses</h1>
-          <p className="text-slate-400">Track your quizzes, polls, and assessment results.</p>
+          <h1 className="text-3xl font-bold text-text-primary tracking-tight">My Responses</h1>
+          <p className="text-text-muted">Track your quizzes, polls, and assessment results.</p>
         </div>
         <div className="flex flex-wrap gap-3">
            {/* Module Filter */}
-           <div className="flex items-center gap-2 bg-lynq-800 px-3 py-2 rounded-lg border border-lynq-700">
-              <Filter size={14} className="text-slate-400"/>
+           <div className="flex items-center gap-2 bg-surface px-3 py-2 rounded-lg border border-border-default">
+              <Filter size={14} className="text-text-muted"/>
               <div className="relative">
                   <select 
                       value={moduleFilter} 
                       onChange={e => setModuleFilter(e.target.value)}
-                      className="appearance-none bg-transparent text-sm text-slate-300 outline-none border-none cursor-pointer pr-6 max-w-[200px] truncate"
+                      className="appearance-none bg-transparent text-sm text-text-secondary outline-none border-none cursor-pointer pr-6 max-w-[200px] truncate"
                   >
-                      <option value="All" className="bg-lynq-800 text-white">All Modules</option>
+                      <option value="All" className="bg-surface text-text-primary">All Modules</option>
                       {uniqueModules.map(title => (
-                        <option key={title} value={title} className="bg-lynq-800 text-white">{title}</option>
+                        <option key={title} value={title} className="bg-surface text-text-primary">{title}</option>
                       ))}
                   </select>
-                  <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-slate-500 pointer-events-none" size={12} />
+                  <ChevronDown className="absolute right-0 top-1/2 -translate-y-1/2 text-text-muted pointer-events-none" size={12} />
               </div>
            </div>
 
@@ -95,60 +95,60 @@ export const UserResponses: React.FC = () => {
               placeholder="Search activities..." 
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className="bg-lynq-800 border border-lynq-700 rounded-lg px-4 py-2 text-slate-200 outline-none focus:border-lynq-accent text-sm"
+              className="bg-surface border border-border-default rounded-lg px-4 py-2 text-text-primary outline-none focus:border-brand text-sm placeholder:text-text-muted"
            />
            <button 
              onClick={downloadCSV}
-             className="bg-lynq-accent hover:bg-lynq-accentHover text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium transition-colors text-sm"
+             className="bg-brand hover:bg-brand-hover text-white px-4 py-2 rounded-lg flex items-center gap-2 font-medium transition-colors text-sm"
            >
              <Download size={16} /> CSV
            </button>
         </div>
       </div>
 
-      <div className="bg-lynq-800 border border-lynq-700 rounded-xl overflow-hidden shadow-sm overflow-x-auto">
+      <div className="bg-surface border border-border-default rounded-xl overflow-hidden shadow-sm overflow-x-auto">
         <table className="w-full text-left border-collapse min-w-[700px]">
-          <thead className="bg-lynq-900/50 border-b border-lynq-700">
+          <thead className="bg-surface-hover dark:bg-lynq-900/50 border-b border-border-default">
             <tr>
-              <th className="p-4 text-slate-400 font-medium text-xs uppercase tracking-wider">Activity Name</th>
-              <th className="p-4 text-slate-400 font-medium text-xs uppercase tracking-wider">Type</th>
-              <th className="p-4 text-slate-400 font-medium text-xs uppercase tracking-wider">Module</th>
-              <th className="p-4 text-slate-400 font-medium text-xs uppercase tracking-wider">Date</th>
-              <th className="p-4 text-slate-400 font-medium text-xs uppercase tracking-wider">Score</th>
-              <th className="p-4 text-slate-400 font-medium text-xs uppercase tracking-wider">Status</th>
-              <th className="p-4 text-slate-400 font-medium text-xs uppercase tracking-wider text-right">Action</th>
+              <th className="p-4 text-text-muted font-medium text-xs uppercase tracking-wider">Activity Name</th>
+              <th className="p-4 text-text-muted font-medium text-xs uppercase tracking-wider">Type</th>
+              <th className="p-4 text-text-muted font-medium text-xs uppercase tracking-wider">Module</th>
+              <th className="p-4 text-text-muted font-medium text-xs uppercase tracking-wider">Date</th>
+              <th className="p-4 text-text-muted font-medium text-xs uppercase tracking-wider">Score</th>
+              <th className="p-4 text-text-muted font-medium text-xs uppercase tracking-wider">Status</th>
+              <th className="p-4 text-text-muted font-medium text-xs uppercase tracking-wider text-right">Action</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-lynq-700">
+          <tbody className="divide-y divide-border-default">
             {filteredResponses.length > 0 ? (
               filteredResponses.map((res) => (
-                <tr key={res.id} className="hover:bg-lynq-700/30 transition-colors">
-                  <td className="p-4 text-white font-medium">{res.activityTitle}</td>
+                <tr key={res.id} className="hover:bg-surface-hover transition-colors">
+                  <td className="p-4 text-text-primary font-medium">{res.activityTitle}</td>
                   <td className="p-4">
-                      <div className="flex items-center gap-2 text-sm text-slate-300">
+                      <div className="flex items-center gap-2 text-sm text-text-secondary">
                           {getTypeIcon(res.type)}
                           {res.type}
                       </div>
                   </td>
-                  <td className="p-4 text-slate-400 text-sm truncate max-w-[150px]" title={res.moduleTitle}>{res.moduleTitle}</td>
-                  <td className="p-4 text-slate-400 text-sm">{res.submittedAt}</td>
+                  <td className="p-4 text-text-muted text-sm truncate max-w-[150px]" title={res.moduleTitle}>{res.moduleTitle}</td>
+                  <td className="p-4 text-text-muted text-sm">{res.submittedAt}</td>
                   <td className="p-4">
                     {res.score !== undefined ? (
-                        <span className={`font-bold ${res.score >= 80 ? 'text-green-400' : res.score >= 50 ? 'text-yellow-400' : 'text-red-400'}`}>
+                        <span className={`font-bold ${res.score >= 80 ? 'text-green-600 dark:text-green-400' : res.score >= 50 ? 'text-yellow-600 dark:text-yellow-400' : 'text-red-600 dark:text-red-400'}`}>
                         {res.score}%
                         </span>
                     ) : (
-                        <span className="text-slate-500 text-xs">N/A</span>
+                        <span className="text-text-muted text-xs">N/A</span>
                     )}
                   </td>
                   <td className="p-4">
                      <div className="flex items-center gap-2">
                         {getStatusIcon(res.status)}
-                        <span className="text-slate-300 text-sm">{res.status}</span>
+                        <span className="text-text-secondary text-sm">{res.status}</span>
                      </div>
                   </td>
                   <td className="p-4 text-right">
-                     <button className="text-lynq-accent hover:text-white text-sm underline decoration-lynq-accent/50">
+                     <button className="text-brand hover:text-brand-hover text-sm underline decoration-brand/50">
                        View Details
                      </button>
                   </td>
@@ -156,7 +156,7 @@ export const UserResponses: React.FC = () => {
               ))
             ) : (
               <tr>
-                <td colSpan={7} className="p-8 text-center text-slate-500">
+                <td colSpan={7} className="p-8 text-center text-text-muted">
                   No responses found matching your criteria.
                 </td>
               </tr>
