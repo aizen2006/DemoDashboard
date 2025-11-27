@@ -77,3 +77,51 @@ export interface DashboardStats {
   issuesResolved: { month: string; raised: number; resolved: number }[];
   uploadHistory: { date: string; moduleName: string; user: string }[];
 }
+
+// ============================================
+// AI AGENT TYPES
+// ============================================
+
+export interface InsightTrend {
+  metric: string;
+  direction: 'up' | 'down' | 'stable';
+  analysis: string;
+}
+
+export interface DataQuality {
+  isValid: boolean;
+  issues?: string[];
+}
+
+export interface InsightOutput {
+  dataQuality: DataQuality;
+  trends: InsightTrend[];
+  insights: string[];
+  callToAction: string;
+  confidence: number;
+}
+
+export interface DataValidationOutput {
+  isValid: boolean;
+  issues?: string[];
+  sanitizedData?: Record<string, unknown>;
+}
+
+export interface TrendAnalysisOutput {
+  trends: Array<{
+    metric: string;
+    direction: 'up' | 'down' | 'stable';
+    percentageChange?: number;
+    analysis: string;
+  }>;
+  overallHealth: 'excellent' | 'good' | 'needs_attention' | 'critical';
+}
+
+export interface RecommendationOutput {
+  recommendations: Array<{
+    priority: 'high' | 'medium' | 'low';
+    area: string;
+    action: string;
+    expectedImpact: string;
+  }>;
+}
