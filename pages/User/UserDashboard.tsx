@@ -72,7 +72,7 @@ export const UserDashboard: React.FC = () => {
           value={`${metrics.objectiveScore}%`} 
           trend={{ value: 12, direction: 'up' }}
           info="How correct learners were on quiz items we can verify."
-          subtitle="% learners mid-way..."
+          subtitle=""
           colSpan="col-span-1 md:col-span-1 lg:col-span-3"
         />
         <MetricCard 
@@ -80,7 +80,7 @@ export const UserDashboard: React.FC = () => {
           value={metrics.strScore} 
           trend={{ value: 5, direction: 'up' }}
           info="Single strength score linking skill to completion."
-          subtitle="Average star rati..."
+          subtitle=""
           colSpan="col-span-1 md:col-span-1 lg:col-span-3"
         />
         <MetricCard 
@@ -88,7 +88,7 @@ export const UserDashboard: React.FC = () => {
           value={`${metrics.engagementRate}%`} 
           trend={{ value: 3, direction: 'down' }}
           info="How much of the module each learner actually touched."
-          subtitle="% learners who exite..."
+          subtitle=""
           colSpan="col-span-1 md:col-span-1 lg:col-span-3"
         />
         <MetricCard 
@@ -96,7 +96,7 @@ export const UserDashboard: React.FC = () => {
           value={`${metrics.completionRate}%`} 
           trend={{ value: 8, direction: 'up' }}
           info="Who truly finished the module."
-          subtitle="Active learners..."
+          subtitle=""
           colSpan="col-span-1 md:col-span-1 lg:col-span-3"
         />
         
@@ -109,7 +109,7 @@ export const UserDashboard: React.FC = () => {
             value={metrics.avgRating} 
             trend={{ value: 2, direction: 'neutral' }}
             info="Satisfaction with the learning."
-            subtitle="Average star rati..."
+            subtitle=""
             className="flex-1"
             colSpan="w-1/2 lg:w-full"
           />
@@ -119,7 +119,7 @@ export const UserDashboard: React.FC = () => {
             value={metrics.avgTimeSaved} 
             trend={{ value: 12, direction: 'up' }}
             info="Average time saved per learner by applying these skills."
-            subtitle="Avg minutes..."
+            subtitle=""
             className="flex-1"
             colSpan="w-1/2 lg:w-full"
           />

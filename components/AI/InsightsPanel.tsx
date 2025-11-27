@@ -81,11 +81,19 @@ export const InsightsPanel: FC<InsightsPanelProps> = ({ data }) => {
       const result = await generateAgentInsights(data);
       setInsights(result);
       
-      // Check if analysis failed
-      if (!result.dataQuality.isValid && result.confidence === 0) {
-        setError('Analysis could not be completed. Please try again.');
+      // Only show error if there's an API/connection issue (confidence 0 with issues)
+      if (result.confidence === 0 && result.dataQuality.issues && result.dataQuality.issues.length > 0) {
+        // Check if it's a configuration error vs a temporary error
+        const isConfigError = result.dataQuality.issues.some(
+          issue => issue.includes('API key') || issue.includes('configured')
+        );
+        if (isConfigError) {
+          setError('API key not configured. Please add VITE_OPENAI_API_KEY to your .env file.');
+        }
+        // For other errors, we still show the insights (which contain error messages)
       }
     } catch (err) {
+      console.error('Generate insights error:', err);
       setError(err instanceof Error ? err.message : 'An unexpected error occurred');
     } finally {
       setLoading(false);
